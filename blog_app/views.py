@@ -3,8 +3,8 @@ from .models import About_Me, Contact, Portfolio, Blog
 import requests
 
 
-TELEGRAM_BOT_TOKEN = '8035697965:AAF1yWUahleYdMOPhcBaLpS99TX-6ZjckTU'
-TELEGRAM_CHAT_ID = '7975942802'
+TELEGRAM_BOT_TOKEN = 'token'
+TELEGRAM_CHAT_ID = 'chat id'
 
 def home(request):
 
