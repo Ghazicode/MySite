@@ -1,8 +1,23 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import About_Me, Contact, Portfolio, Blog
+import requests
 
+
+TELEGRAM_BOT_TOKEN = '8035697965:AAF1yWUahleYdMOPhcBaLpS99TX-6ZjckTU'
+TELEGRAM_CHAT_ID = '7975942802'
 
 def home(request):
+
+    def send_telegram_message(name, email, body):
+        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+        payload = {
+            'chat_id': TELEGRAM_CHAT_ID,
+            'text': f"پیام جدید \n\nاسم: {name}\n ایمیل : {email}\n پیام : {body}"
+    }
+        response = requests.post(url, json=payload)
+        return response.status_code == 200
+
+    
 
     #تماس با ما
 
@@ -16,11 +31,13 @@ def home(request):
         
         
         
+        
 
 
         name = request.POST.get('name')
         email = request.POST.get('email')
         body = request.POST.get('body')
+        send_telegram_message(name, email, body)
         Contact.objects.create(name = name, email = email, body = body,gender = gender )
         return redirect('/')
 
